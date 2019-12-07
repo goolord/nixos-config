@@ -58,6 +58,8 @@
     ZSH = [ "${pkgs.oh-my-zsh}/share/oh-my-zsh" ];
     FZF_BASE = [ "${pkgs.fzf}/share/fzf" ];
     QT_QPA_PLATFORMTHEME = [ "qt5ct" ];
+    PATH = [ "$HOME/bin/" ];
+    LD_LIBRARY_PATH = [ "$HOME/.nix-profile/lib" ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
