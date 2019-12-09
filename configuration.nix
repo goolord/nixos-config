@@ -27,6 +27,8 @@
   networking.useDHCP = false;
   networking.interfaces.wlp1s0.useDHCP = true;
 
+  networking.nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -54,12 +56,16 @@
   environment.pathsToLink = [ "/libexec" ];
 
   environment.variables = {
-    TERMINAL = [ "alacritty" ];
-    ZSH = [ "${pkgs.oh-my-zsh}/share/oh-my-zsh" ];
+    EDITOR = "nvim";
     FZF_BASE = [ "${pkgs.fzf}/share/fzf" ];
-    QT_QPA_PLATFORMTHEME = [ "qt5ct" ];
-    PATH = [ "$HOME/bin/" ];
     LD_LIBRARY_PATH = [ "$HOME/.nix-profile/lib" ];
+    PATH = [ "$HOME/bin/" ];
+    QT_AUTO_SCREEN_SCALE_FACTOR= "0";
+    QT_SCALE_FACTOR = "1.25";
+    QT_QPA_PLATFORMTHEME = [ "qt5ct" ];
+    TERMINAL = [ "alacritty" ];
+    XCURSOR_SIZE = "28";
+    ZSH = [ "${pkgs.oh-my-zsh}/share/oh-my-zsh" ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -83,7 +89,11 @@
 
   # kernel stuff, graphics stuff
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "amd_iommu=pt" "ivrs_ioapic[32]=00:14.0" "iommu=soft" "acpi_osi=" ];
+  boot.kernelParams = [ 
+    "amd_iommu=pt" 
+    "ivrs_ioapic[32]=00:14.0" 
+    "iommu=soft" "acpi_osi=" 
+  ];
   services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
