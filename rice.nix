@@ -14,6 +14,22 @@
 
   services.xserver = {
     enable = true;
+
+    displayManager = {
+      lightdm = {
+        enable = true;
+        greeters.gtk = {
+          theme = { 
+            package = pkgs.numix-gtk-theme;
+            name = "Numix";
+          };
+          iconTheme = {
+            package = pkgs.numix-icon-theme;
+            name = "Numix";
+          };
+        };
+      };
+    };
     
     desktopManager = {
       default = "xfce";

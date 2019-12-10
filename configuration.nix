@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./rice.nix
+      ./environment.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -42,31 +43,6 @@
 
   # Set your time zone.
   time.timeZone = "America/New_York";
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget vim
-    lxappearance arandr
-    zsh
-    networkmanagerapplet
-    binutils gcc gnumake openssl pkgconfig zlib
-  ];
-  
-  environment.pathsToLink = [ "/libexec" ];
-
-  environment.variables = {
-    EDITOR = "nvim";
-    FZF_BASE = [ "${pkgs.fzf}/share/fzf" ];
-    LD_LIBRARY_PATH = [ "$HOME/.nix-profile/lib" ];
-    PATH = [ "$HOME/bin/" ];
-    QT_AUTO_SCREEN_SCALE_FACTOR= "0";
-    QT_SCALE_FACTOR = "1.25";
-    QT_QPA_PLATFORMTHEME = [ "qt5ct" ];
-    TERMINAL = [ "alacritty" ];
-    XCURSOR_SIZE = "28";
-    ZSH = [ "${pkgs.oh-my-zsh}/share/oh-my-zsh" ];
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -108,10 +84,6 @@
 
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
-
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
 
